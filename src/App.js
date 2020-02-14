@@ -12,14 +12,12 @@ class App extends Component {
     super();
 
     this.state = {
-      propertyName: '',
-      address: '',
-      city: '',
-      state: '',
-      zip: ''
+      information: [],
+      currentInfo: null
     };
 
     this.getInfo = this.getInfo.bind(this);
+    this.selectInfo = this.selectInfo.bind(this);
   }
 
   componentDidMount() {
@@ -29,25 +27,49 @@ class App extends Component {
   getInfo() {
     axios
       .get('/api/info')
-      .then(res =>
-        this.setState({
-          propertyName: res.data,
-          address: res.data,
-          city: res.data,
-          state: res.data,
-          zip: res.data
-        })
-      )
+      .then(res => {
+        console.log(res);
+        this.setState({ information: res.data });
+      })
       .catch(err => console.log(err));
   }
 
+  selectInfo(currentInfo) {
+    this.setState({ currentInfo });
+  }
+
   render() {
+    const { information } = this.state;
     return (
-      <div className='App'>
-        <Dashboard />
-        <Header />
-        <Wizard />
-      </div>
+      <Router>
+        <div className='App'>
+          <Header />
+          <Switch>
+            <Route
+              path='/'
+              exact
+              render={props => (
+                <Dashboard
+                  {...props}
+                  selectInfo={this.selectInfo}
+                  getInfo={this.getInfo}
+                  information={information}
+                />
+              )}
+            />
+            <Route
+              path='/wizard'
+              render={props => (
+                <Wizard
+                  {...props}
+                  currentInfo={this.state.currentInfo}
+                  getInfo={this.getInfo}
+                />
+              )}
+            />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }

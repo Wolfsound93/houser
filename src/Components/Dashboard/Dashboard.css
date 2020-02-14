@@ -1,0 +1,9 @@
+.Dashboard {
+  width: 50vw;
+  background-color: #e5f4ec;
+}
+
+.dash-header {
+  display: flex;
+  justify-content: space-between;
+}
