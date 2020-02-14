@@ -41,12 +41,12 @@ class App extends Component {
   render() {
     const { information } = this.state;
     const mappedInfo = information.map((val, index) => {
-      // <House
-      //   key={index}
-      //   selectInfo={this.selectInfo}
-      //   getInfo={this.getInfo}
-      //   information={information}
-      // />;
+      <House
+        key={index}
+        selectInfo={this.selectInfo}
+        getInfo={this.getInfo}
+        information={information}
+      />;
     });
     return (
       <Router>
