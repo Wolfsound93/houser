@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Dashboard from './Components/Dashboard/Dashboard';
+import Header from './Components/Header/Header';
+import House from './Components/House/House';
+import Wizard from './Components/Wizard/Wizard';
+import axios from 'axios';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      propertyName: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: ''
+    };
+
+    this.getInfo = this.getInfo.bind(this);
+  }
+
+  componentDidMount() {
+    this.getInfo();
+  }
+
+  getInfo() {
+    axios
+      .get('/api/info')
+      .then(res =>
+        this.setState({
+          propertyName: res.data,
+          address: res.data,
+          city: res.data,
+          state: res.data,
+          zip: res.data
+        })
+      )
+      .catch(err => console.log(err));
+  }
+
+  render() {
+    return (
+      <div className='App'>
+        <Dashboard />
+        <Header />
+        <Wizard />
+      </div>
+    );
+  }
 }
 
 export default App;
