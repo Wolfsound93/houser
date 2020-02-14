@@ -27,15 +27,15 @@ class Wizard extends Component {
           <button>Cancel</button>
         </Link>
         <h3>property Name</h3>
-        <input name='name' />
+        <input onChange={this.inputChange} name='name' />
         <h3>Address</h3>
-        <input name='Address' />
+        <input onChange={this.inputChange} name='Address' />
         <h3>City</h3>
-        <input name='city' />
+        <input onChange={this.inputChange} name='city' />
         <h3>State</h3>
-        <input name='state' />
+        <input onChange={this.inputChange} name='state' />
         <h3>Zip</h3>
-        <input name='zip' />
+        <input onChange={this.inputChange} name='zip' />
         <br />
         <br />
         <button>Complete</button>
